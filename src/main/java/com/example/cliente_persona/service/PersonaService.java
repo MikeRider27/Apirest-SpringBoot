@@ -29,4 +29,20 @@ public class PersonaService {
     public void deletePersona(Long id) {
         personaRepository.deleteById(id);
     }
+    
+    public Persona updatePersona(Long id, Persona personaActualizar) {
+        return personaRepository.findById(id)
+                .map(persona -> {
+                    persona.setNombre(personaActualizar.getNombre());
+                    persona.setEdad(personaActualizar.getEdad());
+                    persona.setGenero(personaActualizar.getGenero());
+                    persona.setDireccion(personaActualizar.getDireccion());
+                    persona.setTelefono(personaActualizar.getTelefono());
+
+                    
+                    // Otros campos que desees actualizar
+                    return personaRepository.save(persona);
+                })
+                .orElseThrow(() -> new PersonaNotFoundException(id));
+    }
 }

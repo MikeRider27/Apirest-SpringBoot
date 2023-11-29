@@ -36,6 +36,12 @@ public class PersonaController {
     public void deletePersona(@PathVariable Long id) {
         personaService.deletePersona(id);
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Persona> updatePersona(@PathVariable Long id, @RequestBody Persona personaActualizar) {
+        Persona personaActualizada = personaService.updatePersona(id, personaActualizar);
+        return new ResponseEntity<>(personaActualizada, HttpStatus.OK);
+    }
 
     @ExceptionHandler(PersonaNotFoundException.class)
     public ResponseEntity<String> handlePersonaNotFoundException(PersonaNotFoundException ex) {
