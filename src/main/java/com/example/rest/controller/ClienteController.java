@@ -2,7 +2,6 @@ package com.example.rest.controller;
 
 import com.example.rest.exception.ClienteNotFoundException;
 import com.example.rest.model.Cliente;
-import com.example.rest.model.Persona;
 import com.example.rest.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
