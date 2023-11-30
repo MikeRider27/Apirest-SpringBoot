@@ -1,18 +1,18 @@
-package com.example.cliente_persona.controller;
+package com.example.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.cliente_persona.exception.PersonaNotFoundException;
-import com.example.cliente_persona.model.Persona;
-import com.example.cliente_persona.service.PersonaService;
+import com.example.rest.exception.PersonaNotFoundException;
+import com.example.rest.model.Persona;
+import com.example.rest.service.PersonaService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/personas")
+@RequestMapping("/api/personas")
 public class PersonaController {
     @Autowired
     private PersonaService personaService;
@@ -28,15 +28,15 @@ public class PersonaController {
     }
 
     @PostMapping
-    public Persona savePersona(@RequestBody Persona persona) {
-        return personaService.savePersona(persona);
+    public Persona createPersona(@RequestBody Persona persona) {
+        return personaService.createPersona(persona);
     }
 
     @DeleteMapping("/{id}")
     public void deletePersona(@PathVariable Long id) {
         personaService.deletePersona(id);
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<Persona> updatePersona(@PathVariable Long id, @RequestBody Persona personaActualizar) {
         Persona personaActualizada = personaService.updatePersona(id, personaActualizar);

@@ -1,10 +1,11 @@
-package com.example.cliente_persona.service;
+package com.example.rest.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.cliente_persona.exception.PersonaNotFoundException;
-import com.example.cliente_persona.model.Persona;
-import com.example.cliente_persona.repository.PersonaRepository;
+import com.example.rest.exception.PersonaNotFoundException;
+import com.example.rest.model.Persona;
+import com.example.rest.repository.PersonaRepository;
 
 import java.util.List;
 
@@ -22,14 +23,14 @@ public class PersonaService {
                 .orElseThrow(() -> new PersonaNotFoundException(id));
     }
 
-    public Persona savePersona(Persona persona) {
+    public Persona createPersona(Persona persona) {
         return personaRepository.save(persona);
     }
 
     public void deletePersona(Long id) {
         personaRepository.deleteById(id);
     }
-    
+
     public Persona updatePersona(Long id, Persona personaActualizar) {
         return personaRepository.findById(id)
                 .map(persona -> {
@@ -39,7 +40,6 @@ public class PersonaService {
                     persona.setDireccion(personaActualizar.getDireccion());
                     persona.setTelefono(personaActualizar.getTelefono());
 
-                    
                     // Otros campos que desees actualizar
                     return personaRepository.save(persona);
                 })

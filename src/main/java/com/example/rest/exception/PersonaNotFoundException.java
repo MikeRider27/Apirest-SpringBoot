@@ -1,4 +1,4 @@
-package com.example.cliente_persona.exception;
+package com.example.rest.exception;
 
 public class PersonaNotFoundException extends RuntimeException {
     public PersonaNotFoundException(Long id) {

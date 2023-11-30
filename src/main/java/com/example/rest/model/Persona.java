@@ -1,4 +1,4 @@
-package com.example.cliente_persona.model;
+package com.example.rest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
