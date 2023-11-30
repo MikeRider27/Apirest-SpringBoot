@@ -2,6 +2,8 @@ package com.example.rest.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -23,9 +25,8 @@ public class Cliente {
         // Constructor por defecto necesario para JPA
     }
 
-    public Cliente(Persona persona, String contrasena, String estado) {
+    public Cliente(Persona persona, String estado) {
         this.persona = persona;
-        this.contrasena = contrasena;
         this.estado = estado;
     }
 
@@ -47,6 +48,7 @@ public class Cliente {
         this.persona = persona;
     }
 
+    @JsonIgnore
     public String getContrasena() {
         return contrasena;
     }

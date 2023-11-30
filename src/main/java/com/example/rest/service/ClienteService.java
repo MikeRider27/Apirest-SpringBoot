@@ -2,7 +2,6 @@ package com.example.rest.service;
 
 import com.example.rest.exception.ClienteNotFoundException;
 import com.example.rest.model.Cliente;
-import com.example.rest.model.Persona;
 import com.example.rest.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-   public Cliente getClienteById(Long id) {
+    public Cliente getClienteById(Long id) {
         return clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNotFoundException(id));
     }
