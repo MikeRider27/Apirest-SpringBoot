@@ -28,7 +28,7 @@ public class PersonaController {
     @PostMapping
     public ResponseEntity<String> createPersona(@RequestBody Persona persona) {
         try {
-            Persona nuevaPersona = personaService.createPersona(persona);
+            personaService.createPersona(persona);
             return new ResponseEntity<>("Persona creada exitosamente", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear la persona: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

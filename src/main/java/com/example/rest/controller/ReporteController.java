@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rest.model.Movimiento;
-import com.example.rest.service.MovimientoService;
+/*import com.example.rest.service.MovimientoService;
 
 @RestController
 @RequestMapping("/reportes")
@@ -31,4 +31,4 @@ public class ReporteController {
         List<Movimiento> movimientos = movimientoService.getMovimientosByFilter(fechaInicio, fechaFin, clienteId);
         return new ResponseEntity<>(movimientos, HttpStatus.OK);
     }
-}
+}*/

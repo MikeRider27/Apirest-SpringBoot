@@ -44,4 +44,20 @@ public class CuentaService {
 
         return cuentaRepository.save(cuentaExistente);
     }
+
+    public Cuenta actualizarCuenta(Cuenta cuenta) {
+        // Obtener la cuenta existente por ID
+        Cuenta cuentaExistente = getCuentaById(cuenta.getId());
+
+        // Actualizar los campos según sea necesario
+        cuentaExistente.setNumeroCuenta(cuenta.getNumeroCuenta());
+        cuentaExistente.setTipoCuenta(cuenta.getTipoCuenta());
+        cuentaExistente.setSaldoInicial(cuenta.getSaldoInicial());
+        cuentaExistente.setEstado(cuenta.getEstado());
+
+        // Actualizar el cliente asociado si es necesario
+        cuentaExistente.setCliente(cuenta.getCliente());
+
+        return cuentaRepository.save(cuentaExistente);
+    }
 }

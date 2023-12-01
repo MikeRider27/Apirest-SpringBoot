@@ -17,7 +17,9 @@ public class Cliente {
     private Persona persona;
 
     private String contrasena;
-    private String estado;
+
+    @Column(name = "estado")
+    private boolean estado;  // O puedes usar Boolean si prefieres permitir null
 
     // Constructores
 
@@ -25,7 +27,7 @@ public class Cliente {
         // Constructor por defecto necesario para JPA
     }
 
-    public Cliente(Persona persona, String estado) {
+    public Cliente(Persona persona, boolean estado) {
         this.persona = persona;
         this.estado = estado;
     }
@@ -57,11 +59,11 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 }

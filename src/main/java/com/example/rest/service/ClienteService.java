@@ -22,4 +22,23 @@ public class ClienteService {
                 .orElseThrow(() -> new ClienteNotFoundException(id));
     }
 
+    public Cliente createCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
+    }
+
+    public void deleteCliente(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
+    public void updateCliente(Long id, Cliente clienteActualizar) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNotFoundException(id));
+
+        cliente.setPersona(clienteActualizar.getPersona());
+        cliente.setContrasena(clienteActualizar.getContrasena());
+        cliente.setEstado(clienteActualizar.getEstado());
+
+        clienteRepository.save(cliente);
+    }
+
 }
