@@ -7,6 +7,7 @@ import com.example.rest.repository.MovimientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,25 +33,26 @@ public class MovimientoService {
         if (movimiento == null || movimiento.getCuenta() == null) {
             throw new IllegalArgumentException("Movimiento o cuenta no pueden ser nulos");
         }
-        return movimientoRepository.save(movimiento);
+
+        // Verificar si el valor del movimiento es positivo o negativo
+        BigDecimal valorMovimiento = movimiento.getValor();
+        if (valorMovimiento.compareTo(BigDecimal.ZERO) == 0) {
+            throw new IllegalArgumentException("El valor del movimiento no puede ser cero");
+        }
+
+        // Verificar si hay suficiente saldo en la cuenta
+        BigDecimal nuevoSaldo = movimiento.getSaldo().add(valorMovimiento);
+        if (nuevoSaldo.compareTo(BigDecimal.ZERO) < 0) {
+            throw new SaldoInsuficienteException("Saldo no disponible");
+        } else {
+            // Actualizar el saldo de la cuenta
+            movimiento.setSaldo(nuevoSaldo);
+
+            // Guardar el movimiento en la base de datos
+            return movimientoRepository.save(movimiento);
+        }
     }
 
-
-/*
-   public Movimiento addMovimiento(Movimiento movimiento) {
-    if (movimiento == null || movimiento.getCuenta() == null) {
-        throw new IllegalArgumentException("Movimiento o cuenta no pueden ser nulos");
-    }
-
-    if (movimiento.getCuenta().getSaldoInicial() + movimiento.getValor() < 0) {
-        throw new SaldoInsuficienteException("Saldo no disponible");
-    } else {
-        movimiento.getCuenta().setSaldo(movimiento.getCuenta().getSaldo() + movimiento.getValor());
-    }
-    return movimientoRepository.save(movimiento);       
-}*/
-
-  
 
     public List<Movimiento> getMovimientosByFilter(Date fechaInicio, Date fechaFin, Long clienteId) {
         return movimientoRepository.findByFechaBetweenAndCuenta_ClienteId(fechaInicio, fechaFin, clienteId);

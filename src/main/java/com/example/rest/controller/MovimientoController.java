@@ -1,6 +1,7 @@
 package com.example.rest.controller;
 
 import com.example.rest.exception.MovimientoNotFoundException;
+import com.example.rest.exception.SaldoInsuficienteException;
 import com.example.rest.model.Movimiento;
 import com.example.rest.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +41,23 @@ public class MovimientoController {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(SaldoInsuficienteException.class)
+    public ResponseEntity<String> handleSaldoInsuficienteException(SaldoInsuficienteException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
     @PostMapping
     public ResponseEntity<Movimiento> addMovimiento(@RequestBody Movimiento movimiento) {
         try {
-            return new ResponseEntity<>(movimientoService.addMovimiento(movimiento), HttpStatus.CREATED);
+            Movimiento nuevoMovimiento = movimientoService.addMovimiento(movimiento);
+            return new ResponseEntity<>(nuevoMovimiento, HttpStatus.CREATED);
+        } catch (SaldoInsuficienteException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); 
+            // Tipo de dato null, ya que no hay un cuerpo válido en caso de error
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); 
+            // Tipo de dato null, ya que no hay un cuerpo válido en caso de error
         }
     }
 
-
-    // Puedes agregar más métodos según sea necesario
 }
-
