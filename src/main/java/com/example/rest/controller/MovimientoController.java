@@ -25,12 +25,30 @@ public class MovimientoController {
         return movimientoService.getAllMovimientos();
     }
 
+    @GetMapping("/{id}")
+    public Movimiento getMovimientoById(@PathVariable Long id) {
+        return movimientoService.getMovimientoById(id);
+    }
+
     @ExceptionHandler(MovimientoNotFoundException.class)
     public ResponseEntity<String> handleMovimientoNotFoundException(MovimientoNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-  
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping
+    public ResponseEntity<Movimiento> addMovimiento(@RequestBody Movimiento movimiento) {
+        try {
+            return new ResponseEntity<>(movimientoService.addMovimiento(movimiento), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     // Puedes agregar más métodos según sea necesario
 }

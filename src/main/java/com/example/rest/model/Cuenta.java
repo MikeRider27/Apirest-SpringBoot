@@ -20,7 +20,7 @@ public class Cuenta {
     @Column(name = "saldo_inicial")
     private BigDecimal saldoInicial;
 
-    private String estado;
+    private Boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -32,7 +32,7 @@ public class Cuenta {
         // Constructor por defecto necesario para JPA
     }
 
-    public Cuenta(String numeroCuenta, String tipoCuenta, BigDecimal saldoInicial, String estado, Cliente cliente) {
+    public Cuenta(String numeroCuenta, String tipoCuenta, BigDecimal saldoInicial, Boolean estado, Cliente cliente) {
         this.numeroCuenta = numeroCuenta;
         this.tipoCuenta = tipoCuenta;
         this.saldoInicial = saldoInicial;
@@ -74,11 +74,11 @@ public class Cuenta {
         this.saldoInicial = saldoInicial;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
