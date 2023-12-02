@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restspring
+    ports:
+      - "6002:8080"
+
