@@ -36,7 +36,7 @@ public class ClienteService {
 
         cliente.setPersona(clienteActualizar.getPersona());
         cliente.setContrasena(clienteActualizar.getContrasena());
-        cliente.setEstado(clienteActualizar.getEstado());
+        cliente.setEstado(clienteActualizar.isEstado());
 
         clienteRepository.save(cliente);
     }

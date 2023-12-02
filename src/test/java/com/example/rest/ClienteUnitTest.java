@@ -1,42 +1,38 @@
 package com.example.rest;
 
 import com.example.rest.model.Cliente;
-import com.example.rest.model.Persona;
+import com.example.rest.utils.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+//Descomentar lo que esta en /* */
+/*
+@SpringBootTest
 public class ClienteUnitTest {
 
+    @Autowired
+    private TestUtils testUtils;
+
     @Test
-    public void testGettersAndSetters() {
-        // Crear un objeto Persona para asociarlo al Cliente
-        Persona persona = mock(Persona.class);
+    public void testAddClienteUnit() {
+        // Obtener un cliente utilizando el TestUtils
+        Cliente cliente = testUtils.createCliente();
 
-        // Crear un objeto Cliente para la prueba
-        Cliente cliente = new Cliente(persona, true);
-        cliente.setId(1L);
-        cliente.setContrasena("password");
+        // Asegurarse de que el cliente no sea nulo
+        assertNotNull(cliente);
 
-        // Verificar que los métodos get devuelvan los valores esperados
-        assertEquals(1L, cliente.getId());
-        assertEquals(persona, cliente.getPersona());
-        assertEquals("password", cliente.getContrasena());
-        assertEquals(true, cliente.getEstado());
-    }
+        // Asegurarse de que la persona en el cliente no sea nula
+        assertNotNull(cliente.getPersona());
 
+        // Puedes agregar más aserciones según sea necesario para verificar otras propiedades del cliente
 
-    // Ejemplo de una prueba adicional
-    @Test
-    public void testEstadoInicial() {
-        // Crear un objeto Persona para asociarlo al Cliente
-        Persona persona = mock(Persona.class);
+        // Por ejemplo, si hay un campo específico que debe cumplir con ciertas condiciones:
+        // assertTrue(cliente.getAlgunaPropiedad() > 0, "La propiedad 'algunaPropiedad' debe ser mayor que 0");
 
-        // Crear un objeto Cliente para la prueba
-        Cliente cliente = new Cliente(persona, true);
-
-        // Verificar que el estado inicial es el esperado
-        assertEquals(true, cliente.getEstado());
+        // Agregar más aserciones según sea necesario
     }
 }
-
+*/

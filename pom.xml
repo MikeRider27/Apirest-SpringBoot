@@ -81,8 +81,8 @@
                 <version>3.8.0</version>
                 <!-- Actualizado a una versión más reciente -->
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
@@ -92,7 +92,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <addResources>true</addResources>
+                    <mainClass>com.example.rest.RestApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
